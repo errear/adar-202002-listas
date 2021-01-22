@@ -213,7 +213,6 @@ color: #d14;
 a.anchor-section {margin-left: 10px; visibility: hidden; color: inherit;}
 a.anchor-section::before {content: '#';}
 .hasAnchor:hover a.anchor-section {visibility: visible;}
-ul > li > .anchor-section {display: none;}
 </style>
 <script>// Anchor sections v1.0 written by Atsushi Yasumoto on Oct 3rd, 2020.
 document.addEventListener('DOMContentLoaded', function() {
@@ -238,7 +237,7 @@ document.addEventListener('DOMContentLoaded', function() {
   // Add anchors
   h.forEach(function(x) {
     const id = x.id || section_id(x.parentElement);
-    if (id === '' || x.matches(':empty')) {
+    if (id === '') {
       return null;
     }
     let anchor = document.createElement('a');
@@ -568,7 +567,14 @@ summary {
 <li>Utilizando o R, faça o <em>download</em> <a href="https://www.dropbox.com/s/w3wp6iwxqex95ep/S_America_model_wtd_v2.nc?dl=1">deste arquivo netCDF</a> com dados de profundidade do lençol freático para a América do Sul.</li>
 </ol></li>
 </ol>
-<pre class="r"><code># sua resposta aqui</code></pre>
+<p>Baixando os dados.</p>
+<pre class="r"><code>getwd()
+# sua resposta aqui
+link &lt;- &quot;https://www.dropbox.com/s/w3wp6iwxqex95ep/S_America_model_wtd_v2.nc?dl=1&quot;
+download.file(link, 
+              destfile = &quot;S_America_model_wtd_v2.nc&quot;, 
+              mode = &quot;wb&quot;
+              )</code></pre>
 <ol start="2" style="list-style-type: lower-alpha">
 <li>Descubra o(s) nome(s) e a(s) unidades da(s) variável(is) armazenada(s) no arquivo netCDF usando o pacote <strong>ncdf4</strong>. A resposta desta questão são dois vetores do tipo caractere, um com cada informação: <code>var_name</code> e <code>var_unidade</code>.</li>
 </ol>
@@ -576,10 +582,40 @@ summary {
 <ol start="3" style="list-style-type: lower-alpha">
 <li>Importe os dados para o R usando o pacote raster.</li>
 </ol>
-<pre class="r"><code># sua resposta aqui</code></pre>
+<pre class="r"><code># sua resposta aqui
+library(raster)</code></pre>
+<pre><code>## Loading required package: sp</code></pre>
+<pre class="r"><code>#wtd &lt;- brick(&quot;S_America_model_wtd_v2.nc&quot;)
+wtd &lt;- raster(&quot;S_America_model_wtd_v2.nc&quot;)</code></pre>
+<pre><code>## Loading required namespace: ncdf4</code></pre>
+<pre class="r"><code>wtd</code></pre>
+<pre><code>## class      : RasterLayer 
+## dimensions : 8520, 7320, 62366400  (nrow, ncol, ncell)
+## resolution : 0.008333334, 0.008333333  (x, y)
+## extent     : -93, -32, -56, 15  (xmin, xmax, ymin, ymax)
+## crs        : +proj=longlat +datum=WGS84 +no_defs 
+## source     : D:/Dropbox/github/my_reps/errear/adar-202002-listas/templates/S_America_model_wtd_v2.nc 
+## names      : global.climatology.water.table.depth 
+## z-value    : 1970-01-01 
+## zvar       : WTD</code></pre>
 <ol start="4" style="list-style-type: lower-alpha">
-<li><p>Converta os dados importados em um quadro de dados (<em>data frame</em>) incluindo as coordenadas das células do raster e ignorando as células sem informação (oceanos).</p></li>
-<li><p>Altere os nomes das colunas do quadro de dados para “wtd”, “lon”, “lat”</p></li>
+<li>Converta os dados importados em um quadro de dados (<em>data frame</em>) incluindo as coordenadas das células do raster e ignorando as células sem informação (oceanos).</li>
+</ol>
+<pre class="r"><code>library(tictoc)
+tic()
+wtd_df &lt;- as.data.frame(wtd, xy = TRUE, na.rm = TRUE)
+toc()
+str(wtd_df)
+
+# system.time(
+#   wtd_df &lt;- as.data.frame(wtd, xy = TRUE, na.rm = TRUE)
+# )
+
+#wtd_df
+#head(wtd_df)
+#tail(wtd_df)</code></pre>
+<ol start="5" style="list-style-type: lower-alpha">
+<li>Altere os nomes das colunas do quadro de dados para “wtd”, “lon”, “lat”</li>
 </ol>
 <pre class="r"><code># sua resposta aqui</code></pre>
 <ol start="6" style="list-style-type: lower-alpha">

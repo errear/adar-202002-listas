@@ -236,9 +236,20 @@ tibble [730 x 183] (S3: tbl_df/tbl/data.frame)
 
 6. a. Utilizando o R, faça o *download* [deste arquivo netCDF](https://www.dropbox.com/s/w3wp6iwxqex95ep/S_America_model_wtd_v2.nc?dl=1) com dados de profundidade do lençol freático para a América do Sul.
 
-```{r}
+Baixando os dados.
+
+```{r, eval=FALSE}
+getwd()
 # sua resposta aqui
+link <- "https://www.dropbox.com/s/w3wp6iwxqex95ep/S_America_model_wtd_v2.nc?dl=1"
+download.file(link, 
+              destfile = "S_America_model_wtd_v2.nc", 
+              mode = "wb"
+              )
 ```
+
+
+
 
    b. Descubra  o(s) nome(s) e a(s) unidades da(s) variável(is) armazenada(s) no arquivo netCDF usando o pacote **ncdf4**. A resposta desta questão são dois vetores do tipo caractere, um com cada informação: `var_name` e `var_unidade`.
 
@@ -250,11 +261,32 @@ tibble [730 x 183] (S3: tbl_df/tbl/data.frame)
 
 ```{r}
 # sua resposta aqui
+library(raster)
+#wtd <- brick("S_America_model_wtd_v2.nc")
+wtd <- raster("S_America_model_wtd_v2.nc")
+wtd
 ```
 
    d. Converta os dados importados em um quadro de dados (*data frame*) incluindo as coordenadas das células do raster e ignorando as células sem informação (oceanos). 
-   
 
+
+```{r, eval = FALSE}
+
+library(tictoc)
+tic()
+wtd_df <- as.data.frame(wtd, xy = TRUE, na.rm = TRUE)
+toc()
+str(wtd_df)
+
+# system.time(
+#   wtd_df <- as.data.frame(wtd, xy = TRUE, na.rm = TRUE)
+# )
+
+#wtd_df
+#head(wtd_df)
+#tail(wtd_df)
+
+```
 
    e. Altere os nomes das colunas do quadro de dados para "wtd", "lon", "lat"
 
