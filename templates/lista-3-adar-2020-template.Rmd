@@ -32,7 +32,7 @@ output: html_document
 
 
 2. a. Leia os dados texto não estruturados disponíveis em
-https://iri.columbia.edu/~forecast/ensofcst/Data/ensofcst_ALLto0520 e salve-os em um arquivo texto nomeado `previsoes-enos.txt`, mantendo a formatação original dos dados.
+https://iri.columbia.edu/~forecast/ensofcst/Data/archive/ensofcst_cpc_ALL e salve-os em um arquivo texto nomeado `previsoes-enos.txt`, mantendo a formatação original dos dados.
 
 
 ```{r}
