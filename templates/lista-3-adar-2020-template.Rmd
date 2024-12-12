@@ -358,7 +358,7 @@ str(wtd_df)
 - - -
 
 9. Importe no R o arquivo excel com a climatologia das temperaturas mínimas do INMET no período de 1981-2010, disponível
-[aqui](http://www.inmet.gov.br/webcdp/climatologia/normais2/imagens/normais/planilhas/1961-1990/Temperatura-Minima_NCB_1961-1990.xls). Mostre a estrutura dos dados e certifique-se de as colunas dos meses e ano são numéricas.
+[aqui](https://portal.inmet.gov.br/uploads/normais/Temperatura-Minima_NCB_1961-1990.xls). Mostre a estrutura dos dados e certifique-se de as colunas dos meses e ano são numéricas.
 
 ```{r}
 # sua resposta aqui
@@ -366,8 +366,7 @@ str(wtd_df)
 
 - - -
 
-10. Faça *download* de dados gradeados de precipitação diário para todo Brasil com resolução horizontal de 0,25° (arquivo `prec_daily_UT_Brazil_v2.2_20100101_20151231.nc`), disponível em https://utexas.app.box.com/v/Xavier-etal-IJOC-DATA. Navegue pelas páginas até encontrar o arquivo NetCDF. 
-
+10. Faça *download* de dados gradeados de precipitação diário para todo Brasil com resolução horizontal de 0,1° disponível [aqui](https://www.dropbox.com/scl/fi/vqt7qizjnhnzbfkfgo59w/pr_19610101_19801231_BR-DWGD_UFES_UTEXAS_v_3.2.3.nc?rlkey=1ft60lo1qpb3wkaylyfs4genu&st=9migaqqy&dl=1) (tamanho 2.1 GB).
    
    a. Importe os dados para o R, converta-os para *data frame* e verifique o número de colunas e linhas resultantes. 
 
